@@ -1,23 +1,627 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+  <!-- Schema.org FAQ 구조화 데이터 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "쌍둥이보험과 일반 태아보험은 어떤 차이가 있나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "일반 태아보험은 단태아(한 명) 기준으로 설계되지만, 쌍둥이보험(다태아보험)은 두 아이에게 발생할 수 있는 조산, 저체중아, 선천성 질환 등의 위험을 모두 보장하도록 설계됩니다. 특히 저체중아 인큐베이터 비용이나 입원비 보장에 대한 특약이 강화되어 있습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "쌍둥이보험 가입 시기는 언제인가요? 출산 후 가입도 가능한가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "쌍둥이보험은 임신 22주 이전에 가입하는 것이 가장 유리합니다. 이 시기에 가입해야 선천성 질환 관련 보장을 받을 수 있으며, 출산 후에는 가입에 제한이 생기거나 보장 범위가 축소될 수 있습니다. 특히 쌍둥이는 조산 위험이 높기 때문에 미리 가입하는 것이 중요합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "쌍둥이보험료를 절약할 수 있는 팁이 있나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "불필요한 보장을 제외하고 핵심적인 특약(저체중아, 선천성 질환 등) 위주로 구성합니다. 또한 만기 환급형보다는 순수 보장형을 선택하여 보험료를 낮추고, 여러 보험사의 상품을 비교 견적하여 저렴한 곳을 찾아보는 것이 좋습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "쌍둥이보험 가입 시 꼭 확인해야 할 특약(보장 내용)은 무엇인가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "저체중아 인큐베이터 비용 특약, 선천성 질환 보장(중복 보장 여부 확인), 입원 일당 특약, 그리고 암/뇌혈관/허혈성 심장질환 등 주요 질병 보장 항목을 면밀히 검토해야 합니다. 특히 쌍둥이의 경우 저체중아 특약의 한도와 보장 기간을 확인하는 것이 필수적입니다."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- 스타일: 부드럽고 다채로운 색, 타이틀 강조, 계층 구조 -->
+  <style>
+    :root {
+      --primary-color: #2A4D69; /* 진한 파란색 계열 */
+      --secondary-color: #4B86B4; /* 청량한 파란색 */
+      --accent-color: #ADCBE3; /* 밝은 파란색 */
+      --highlight-color: #E7EFF6; /* 아주 밝은 파란색/회색 */
+      --text-color: #2D3E50; /* 어두운 회색 */
+      --bg-light: #F0F4F8; /* 배경색 */
+      --bg-white: #ffffff; /* 흰색 배경 */
+      --btn-color: #FF6F61; /* 버튼 강조색 (주황색) */
+      --btn-hover: #FF4F3B; /* 버튼 호버색 */
+      --table-header-color: #DDEBF7; /* 테이블 헤더 색상 */
+      --chart-bar-color: #4B86B4; /* 차트 막대 색상 */
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin:0; padding:0;
+      background-color: var(--bg-light);
+      color: var(--text-color);
+      line-height:1.8; /* 가독성을 위해 높임 */
+      font-size: 1.05em; /* 가독성을 위해 키움 */
+    }
+    .container {
+      max-width: 1000px;
+      margin:0 auto;
+      padding:0 20px;
+    }
+    header {
+      background-color: var(--primary-color);
+      padding: 30px 20px;
+      text-align: center;
+      color: var(--bg-white);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.8em;
+      font-weight:700;
+    }
+    header h1 a {
+      color: var(--bg-white);
+      text-decoration: none;
+    }
+    .hero {
+      background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+      color: var(--bg-white);
+      text-align: center;
+      padding: 90px 20px;
+    }
+    .hero h1 {
+      font-size: 3.5em;
+      margin-bottom: 20px;
+      font-weight:700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    .hero p {
+      font-size: 1.4em;
+      margin-bottom: 35px;
+    }
+    .cta-btn {
+      background-color: var(--btn-color);
+      color: var(--bg-white);
+      padding: 18px 45px;
+      font-size:1.3em;
+      font-weight: bold;
+      border:none;
+      border-radius:50px;
+      cursor:pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .cta-btn:hover {
+      background-color: var(--btn-hover);
+      transform: translateY(-3px);
+    }
+    .compare-form-box {
+      background-color: var(--bg-white);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      margin-top: 30px;
+      text-align: left;
+    }
+    .compare-form-box h2 {
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 25px;
+      font-size:2em;
+    }
+    .compare-form-box label {
+      display: block;
+      margin-bottom:8px;
+      font-weight:500;
+      font-size: 1.1em;
+      color: var(--text-color);
+    }
+    .compare-form-box input[type="text"],
+    .compare-form-box input[type="tel"],
+    .compare-form-box input[type="date"],
+    .compare-form-box select {
+      width:100%;
+      padding:12px;
+      margin-bottom:20px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      box-sizing:border-box;
+      font-size: 1em;
+    }
+    .compare-form-box input[type="range"] {
+      padding:0;
+    }
+
+    .content-section {
+      margin-top: 40px;
+      background-color: var(--bg-white);
+      padding: 60px 0;
+      border-radius:10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .content-section h2 {
+      font-size: 2.8em;
+      color: var(--secondary-color);
+      margin-bottom:30px;
+      font-weight:700;
+      text-align:center;
+    }
+    .content-section h3 {
+      font-size:1.8em;
+      color: var(--primary-color);
+      margin-top:40px;
+      margin-bottom:20px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid var(--highlight-color);
+    }
+    .content-section h4 {
+      font-size:1.4em;
+      color: var(--secondary-color);
+      margin-top:25px;
+      margin-bottom:10px;
+    }
+    .feature-grid {
+      display:flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top:30px;
+    }
+    .feature-grid .item {
+      width: calc(33.33% - 20px);
+      margin:10px;
+      padding:20px;
+      background-color: var(--highlight-color);
+      border-radius:8px;
+      text-align:center;
+    }
+    .feature-grid .item img {
+      width:80px; height:80px;
+      margin-bottom:15px;
+    }
+    .keyword-list {
+      list-style:none;
+      padding:0;
+      display:flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top:30px;
+    }
+    .keyword-list li {
+      background-color: var(--secondary-color);
+      color: var(--bg-white);
+      padding:10px 20px;
+      margin:5px;
+      border-radius:20px;
+      font-weight:500;
+      font-size: 0.95em;
+    }
+    .faq-item {
+      border-bottom:1px solid #ddd;
+      padding:20px 0;
+    }
+    .faq-item h3 {
+      cursor:pointer;
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      font-size:1.5em;
+      color: var(--primary-color);
+      margin-top:0;
+      margin-bottom:0;
+      padding-bottom:0;
+      border-bottom:none;
+    }
+    .faq-item h3::after {
+      content: '+';
+      font-size:1.5em;
+      color: var(--secondary-color);
+      transition: transform 0.3s;
+    }
+    .faq-item.active h3::after {
+      content: '-';
+      transform: rotate(180deg);
+    }
+    .faq-item p {
+      display: none;
+      padding-top:10px;
+      color:#555;
+      font-size:1.1em;
+    }
+    .faq-item.active p {
+      display: block;
+    }
+
+    /* 표 스타일 */
+    .styled-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 1em;
+      min-width: 400px;
+      background-color: var(--bg-white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    .styled-table thead tr {
+      background-color: var(--primary-color);
+      color: var(--bg-white);
+      text-align: left;
+    }
+    .styled-table th, .styled-table td {
+      padding: 12px 15px;
+      border: 1px solid #f3f3f3;
+    }
+    .styled-table tbody tr {
+      border-bottom: 1px solid #dddddd;
+    }
+    .styled-table tbody tr:nth-of-type(even) {
+      background-color: var(--highlight-color);
+    }
+    .styled-table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--primary-color);
+    }
+
+    /* 그래프 스타일 (간단한 막대 그래프) */
+    .chart-container {
+      margin: 30px 0;
+      padding: 20px;
+      background-color: var(--highlight-color);
+      border-radius: 8px;
+      text-align: center;
+    }
+    .chart-title {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+    .bar-chart {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      height: 200px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+    .bar {
+      width: 15%;
+      background-color: var(--chart-bar-color);
+      margin: 0 5px;
+      text-align: center;
+      color: var(--bg-white);
+      font-weight: bold;
+      position: relative;
+      transition: height 0.5s ease;
+    }
+    .bar span {
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--text-color);
+      font-size: 0.9em;
+    }
+
+    /* 인용구 스타일 */
+    .quote-box {
+        background-color: #f9f9f9;
+        border-left: 5px solid var(--secondary-color);
+        padding: 20px;
+        margin: 20px 0;
+        font-style: italic;
+        color: #555;
+        font-size: 1.1em;
+    }
+
+    footer {
+      background-color: var(--primary-color);
+      color: var(--bg-white);
+      text-align:center;
+      padding: 40px 20px;
+      font-size:0.9em;
+    }
+    footer a {
+      color: var(--bg-white);
+      text-decoration:none;
+      margin:0 10px;
+    }
+    footer a:hover {
+      text-decoration:underline;
+    }
+    @media (max-width:768px) {
+      .hero h1 { font-size:2.4em; }
+      .hero p { font-size:1.2em; }
+      .cta-btn { padding:15px 30px; font-size:1.1em; }
+      .compare-form-box { padding:25px; }
+      .content-section h2 { font-size:2.2em; }
+      .feature-grid .item { width:100%; margin:10px 0; }
+      .keyword-list li { margin:3px; font-size:0.9em; }
+      .styled-table { min-width: 100%; font-size: 0.9em; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1><a href="/">쌍둥이보험 비교 및 가이드</a></h1>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>쌍둥이(다태아) 보험, 현명하게 선택하는 방법</h1>
+        <p>2026년 최신 보험 가이드로 불안함을 줄이고, 현명한 보험 설계로 두 아이의 미래를 지켜주세요.</p>
+        <div class="compare-form-box">
+          <h2>맞춤형 쌍둥이보험 무료 비교 견적 요청</h2>
+          <p>간단한 정보 입력으로 주요 보험사별 쌍둥이보험 예상 금액과 보장 내용을 한눈에 비교할 수 있습니다.</p>
+          <form action="#" method="post">
+            <label for="name">산모 이름</label>
+            <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="휴대폰 번호를 입력하세요" required>
+            <label for="twins-type">쌍둥이 유형</label>
+            <select id="twins-type" name="twins-type" required>
+              <option value="">-- 쌍둥이 유형 선택 --</option>
+              <option value="identical">일란성 쌍둥이</option>
+              <option value="fraternal">이란성 쌍둥이</option>
+              <option value="unknown">아직 확인 불가</option>
+            </select>
+            <label for="expected-date">예정 출산일</label>
+            <input type="date" id="expected-date" name="expected-date" required>
+            <label for="budget">희망 월 보험료 예산 (쌍둥이 1인당)</label>
+            <input type="range" id="budget" name="budget" min="30000" max="150000" step="10000" value="70000" oninput="document.getElementById('budget-value').innerText=this.value+'원'">
+            <div style="text-align: center; font-size: 1.2em; font-weight: bold; margin-bottom: 20px;">예상 예산: <span id="budget-value">70000원</span></div>
+            <button type="submit" class="cta-btn">맞춤 견적 요청하기</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>왜 쌍둥이(다태아) 보험은 일반 보험과 달라야 하는가?</h2>
+        <p>쌍둥이 임신은 단태아 임신에 비해 여러 가지 의학적 위험을 동반하는 경우가 많습니다. 특히 조산( prematurity), 저체중아 출산 위험이 현저히 높아지며, 이로 인해 인큐베이터 입원 및 각종 합병증 치료 비용이 발생할 확률이 높습니다. 일반 태아보험은 이러한 다태아의 특수성을 충분히 반영하지 못하기 때문에, 쌍둥이 전용 보험 상품을 선택하는 것이 매우 중요합니다.</p>
+        <div class="feature-grid">
+          <div class="item">
+            <img src="https://via.placeholder.com/80/4B86B4/fff?text=ICON1" alt="저체중아 아이콘">
+            <h3>저체중아 보장 강화</h3>
+            <p>쌍둥이는 평균적으로 단태아보다 체중이 적게 태어날 확률이 높습니다. 인큐베이터 사용 비용, 입원 치료비 등을 보장하는 특약이 필수입니다.</p>
+          </div>
+          <div class="item">
+            <img src="https://via.placeholder.com/80/4B86B4/fff?text=ICON2" alt="선천성 질환 아이콘">
+            <h3>선천성 질환 보장</h3>
+            <p>쌍둥이 중 한 명에게 선천성 질환이 발견될 경우, 다른 한 명의 보장이 제한될 수 있습니다. 두 아이 모두에게 충분한 보장을 제공하는지 확인해야 합니다.</p>
+          </div>
+          <div class="item">
+            <img src="https://via.placeholder.com/80/4B86B4/fff?text=ICON3" alt="보험료 할인 아이콘">
+            <h3>비용 합리적 설계</h3>
+            <p>두 아이의 보험료를 한 번에 납부해야 하므로, 불필요한 보장을 줄이고 핵심 보장만으로 구성하여 보험료 부담을 낮추는 것이 중요합니다.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:50px;">함께 많이 찾는 키워드</h3>
+        <ul class="keyword-list">
+          <li>#쌍둥이보험</li>
+          <li>#다태아보험</li>
+          <li>#쌍둥이태아보험</li>
+          <li>#쌍둥이보험료평균</li>
+          <li>#쌍둥이보험추천</li>
+          <li>#쌍둥이보험순위</li>
+          <li>#쌍둥이보험가입시기</li>
+          <li>#쌍둥이보험내돈내산후기</li>
+          <li>#쌍둥이실비보험</li>
+          <li>#저체중아특약</li>
+          <li>#다태아지원금</li>
+          <li>#쌍둥이보험장단점</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>쌍둥이보험 가입, 시기가 가장 중요합니다: 22주 이전의 중요성</h2>
+        <p>쌍둥이보험은 '태아보험'의 성격을 갖기 때문에 가입 시기가 매우 중요합니다. 보험사들은 임신 주수에 따라 가입 가능 여부를 결정하며, 보통 임신 22주 이전에 가입해야 저체중아 보장, 선천성 질환 보장과 같은 핵심 특약을 온전히 받을 수 있습니다. 22주 이후에는 가입이 거절되거나 보장 범위가 크게 축소될 수 있습니다.</p>
+        <div class="quote-box">
+          <p>“쌍둥이 임신은 단태아 임신보다 조산의 위험이 7배 이상 높습니다. 따라서 출산 후 발생할 수 있는 의료비에 대비하기 위해 보험 가입은 선택이 아닌 필수입니다. 특히 쌍둥이의 경우 출생 직후 인큐베이터 입원이 흔하기 때문에 태아 특약이 매우 중요합니다.”</p>
+        </div>
+        <h4>쌍둥이보험 가입의 골든 타임</h4>
+        <p>일반적으로 임신을 확인한 시점부터 22주 이내에 가입해야 합니다. 늦어도 22주가 되기 전에 계약을 완료해야 선천성 질환 관련 보장을 받을 수 있는 한계가 있습니다. 출산 후에는 아이의 건강 상태에 따라 가입이 어렵거나, 보장 제한이 생길 수 있으므로 미리 준비하는 것이 현명합니다.</p>
+        <h4>쌍둥이보험료 평균 및 예상 금액 분석</h4>
+        <p>쌍둥이보험료는 일반 태아보험료보다 평균적으로 높게 책정됩니다. 이는 두 명의 아이를 동시에 보장해야 하고, 다태아의 높은 위험률이 반영되기 때문입니다. 일반적으로 월 5만원~10만원 대의 보험료가 형성되지만, 특약 구성과 보장 기간에 따라 금액이 크게 달라질 수 있습니다. 2026년 기준, 비갱신형 30세 만기로 설계할 경우 1인당 월 7만원 내외의 비용이 예상됩니다.</p>
+        <div class="chart-container">
+          <div class="chart-title">쌍둥이보험 vs. 단태아보험 평균 월 보험료 비교 (2026년 기준, 1인당)</div>
+          <div class="bar-chart">
+            <div class="bar" style="height: 120px; background-color: #ADCBE3;"><span>단태아 보험<br>(7~8만원)</span></div>
+            <div class="bar" style="height: 150px; background-color: #4B86B4;"><span>쌍둥이 보험<br>(8~10만원)</span></div>
+          </div>
+          <p style="margin-top: 30px; font-size: 0.9em;">* 가입 시기 및 특약 구성에 따라 금액 차이가 발생할 수 있습니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>쌍둥이보험 핵심 특약: 저체중아, 인큐베이터 보장 필수 점검</h2>
+        <p>쌍둥이보험 가입 시, 다른 무엇보다 중요한 것은 '저체중아 관련 특약'입니다. 쌍둥이 출산 시 평균 체중은 단태아보다 1kg 가량 적으며, 2.5kg 미만의 저체중아로 태어날 확률이 50%를 넘어섭니다. 저체중아는 인큐베이터 입원이 필요한 경우가 많고, 인큐베이터 사용 비용은 매우 고가입니다. 따라서 이 비용을 보장하는 특약에 충분히 가입하는 것이 핵심입니다.</p>
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th>주요 보장 내용</th>
+              <th>쌍둥이보험 가입 시 고려 사항</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>저체중아 인큐베이터 특약</td>
+              <td>출생 후 72시간 이내 2.5kg 미만 저체중아로 인큐베이터 입원 시 보장. 입원 일당 포함.</td>
+              <td>보장 한도(인큐베이터 비용)가 충분한지 확인. 쌍둥이 각각 보장되는지 확인.</td>
+            </tr>
+            <tr>
+              <td>선천성 질환 수술/진단비 특약</td>
+              <td>선천성 기형, 심장 질환 등 출생 시 발견된 질환에 대한 진단비 및 수술비 지급.</td>
+              <td>쌍둥이 중 한 명에게 질환이 발견될 경우, 다른 한 명의 보장 여부를 확인. 22주 이전 가입 필수.</td>
+            </tr>
+            <tr>
+              <td>어린이 실비보험(실손)</td>
+              <td>출생 후 발생하는 의료비에 대한 실손 보장. 입원/통원 치료비 지급.</td>
+              <td>단독으로 가입하며, 보험사별로 보장 범위와 자기부담금 차이점 비교 필요.</td>
+            </tr>
+            <tr>
+              <td>입원 일당 특약</td>
+              <td>질병이나 상해로 입원 시, 정액으로 일당 지급.</td>
+              <td>쌍둥이의 경우 입원할 확률이 높으므로, 일당 금액을 적절히 설계하여 비용 부담을 줄여야 함.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h4>쌍둥이보험 가입 순위 및 추천 기준</h4>
+        <p>쌍둥이보험은 보험사별로 보장 내용, 보험료, 인수 기준(가입 조건)에 큰 차이가 있습니다. 2026년 현재 쌍둥이보험 시장에서 추천되는 기준은 다음과 같습니다. <strong>쌍둥이보험 순위</strong>는 단순히 저렴한 곳을 찾는 것보다, 저체중아 특약의 보장 한도와 선천성 질환 보장 범위를 중심으로 판단해야 합니다. 또한, 쌍둥이보험 후기를 참고하여 청구 절차의 편의성과 설계사의 전문성도 함께 고려하는 것이 좋습니다.</p>
+        <ul>
+          <li><strong>저체중아/인큐베이터 보장 한도가 높은 상품:</strong> 출생 후 초기 비용 지출이 가장 큰 부담이므로, 이 부분의 보장 금액이 높은 상품이 유리합니다.</li>
+          <li><strong>선천성 질환에 대한 중복 보장이 가능한 상품:</strong> 쌍둥이 모두에게 동일한 수준의 보장을 제공하는지 확인해야 합니다.</li>
+          <li><strong>보험료 견적이 저렴한 곳:</strong> 핵심 보장은 동일하되, 불필요한 보장을 제외하여 <strong>쌍둥이보험료</strong>를 낮출 수 있습니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>쌍둥이보험 가입 시 고려해야 할 장단점 및 주의사항</h2>
+        <p>쌍둥이보험은 두 아이를 한 번에 보장하는 만큼 장점과 단점을 명확히 파악하고 가입해야 합니다.</p>
+        <h4>장점: 다태아 특수 위험에 대한 체계적인 대비</h4>
+        <p>쌍둥이의 조산이나 저체중아 출산 위험이 높은 상황에서, 일반 보험으로는 보장받기 어려운 특수 질환이나 합병증을 보장받을 수 있습니다. 또한, 한 번의 가입으로 두 아이 모두에게 필요한 보장을 설계할 수 있어 효율적입니다.</p>
+        <h4>단점: 높은 보험료와 가입 조건의 까다로움</h4>
+        <p>단태아 보험에 비해 보험료가 높고, 임신 주수나 산모의 건강 상태에 따라 가입이 까다로울 수 있습니다. 특히 22주 이후 가입 시에는 보장 제한이 많아지므로 시기를 놓치지 않는 것이 중요합니다. <strong>쌍둥이보험 저렴한곳</strong>을 찾는 것도 중요하지만, 보장 내용을 충분히 확보하는 것이 우선입니다.</p>
+        <h4>쌍둥이보험 내돈내산 후기: 실제 가입자들이 말하는 핵심</h4>
+        <p>실제 <strong>쌍둥이보험 내돈내산 후기</strong>를 살펴보면, 가입 시 설계사의 전문성이 매우 중요하게 언급됩니다. 다태아보험에 대한 이해가 부족한 설계사는 불필요한 특약을 추천하여 보험료를 높이는 경우가 있기 때문입니다. 전문 설계사와 상담을 통해 우리 아이들에게 꼭 필요한 특약만 선별하여 가입해야 합니다. <strong>쌍둥이보험 비교</strong>를 통해 여러 업체 견적을 받아보는 것이 좋습니다.</p>
+        <div class="quote-box">
+          <p>“쌍둥이 출산은 예측하기 어려운 변수가 많습니다. 저체중아로 태어나 인큐베이터에 입원했을 때, 보험료는 아깝지 않다는 생각이 들었습니다. 하지만 불필요한 특약까지 가입했더니 보험료 부담이 너무 커서 나중에 해지했습니다. 꼭 필요한 보장 위주로 가입하세요.”</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>쌍둥이보험료 절약 팁과 현명한 가입 전략</h2>
+        <p>두 아이의 보험료를 동시에 납부해야 하는 만큼, 쌍둥이보험 가입 시 보험료 절약 전략이 필수적입니다.</p>
+        <h4>1. 만기 환급형보다는 순수 보장형 선택</h4>
+        <p>만기 환급형은 납부한 보험료를 만기에 돌려받는 대신, 매월 납입하는 보험료가 순수 보장형보다 높습니다. 보험료 부담을 줄이기 위해서는 순수 보장형을 선택하여 보험료를 20~30% 절감할 수 있습니다.</p>
+        <h4>2. 불필요한 특약 과감하게 제외</h4>
+        <p>보험사 설계 시 과도하게 많은 특약을 포함하면 <strong>쌍둥이보험 금액</strong>이 상승합니다. 쌍둥이에게 핵심적인 저체중아 특약, 선천성 질환 특약 외에 자녀 배상 책임, 골절 진단비 등은 다른 보험이나 성인이 된 후에 가입해도 충분합니다. 불필요한 특약은 제외하고 <strong>쌍둥이보험 싼곳</strong>을 찾는 것이 좋습니다.</p>
+        <h4>3. 30세 만기 vs. 100세 만기 비교</h4>
+        <p>보험 보장 기간을 30세 만기로 할지, 100세 만기로 할지에 따라 보험료가 크게 달라집니다. 30세 만기로 설계하면 보험료가 저렴하지만, 성인이 된 후 다시 보험에 가입해야 합니다. 100세 만기는 초기 보험료는 높지만 평생 보장받을 수 있습니다. 두 옵션을 모두 비교하여 <strong>쌍둥이보험 장단점</strong>을 파악하고 결정해야 합니다.</p>
+        <h4>4. 보험사별 비교 견적 요청 (최대 5곳 이상)</h4>
+        <p>보험사마다 쌍둥이보험의 인수 기준과 보험료가 다릅니다. A사의 상품이 B사보다 특정 보장에서 <strong>쌍둥이보험 차이점</strong>을 보일 수 있습니다. 여러 보험사의 견적을 받아보면서 <strong>쌍둥이보험 비교</strong>를 통해 가장 유리한 상품을 찾는 것이 현명한 가입 전략입니다.</p>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>자주 묻는 질문 (FAQ)</h2>
+
+        <div class="faq-item">
+          <h3>Q1. 일란성 쌍둥이와 이란성 쌍둥이, 보험 가입에 차이가 있나요?</h3>
+          <p>A. 의학적으로는 일란성 쌍둥이가 이란성 쌍둥이보다 합병증 위험이 약간 높다고 알려져 있습니다. 보험사마다 약간의 가입 조건 차이가 있을 수 있지만, 일반적으로 보험료나 주요 보장 구성에는 큰 차이가 없습니다. 다만, 일부 보험사에서는 일란성 쌍둥이의 경우 보장 금액 한도가 더 낮게 책정되거나 가입 심사가 더 까다로울 수 있습니다. 이는 보험사별 규정에 따라 달라지므로, 전문가와 상담 시 반드시 확인해야 합니다.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Q2. 쌍둥이보험 가입 후 한 아이에게만 문제가 생기면 다른 아이도 보장받지 못하나요?</h3>
+          <p>A. 아닙니다. 쌍둥이보험은 각각의 아이를 개별적으로 보장하는 형태로 설계됩니다. 만약 한 아이가 선천성 질환으로 인해 보험 가입 후에도 추가적인 치료가 필요한 경우, 해당 아이의 보험에서 보장이 이루어지며, 다른 아이의 보험에는 영향을 주지 않습니다. 다만, 쌍둥이 중 한 명에게 중증 질환이 발생할 경우, 다른 아이에게도 유사 질환 발생 가능성이 있다며 보험사에서 향후 보장 제한을 걸 수도 있습니다. 따라서 가입 초기 단계에서 '두 아이 모두에게 중복 보장'이 가능한지 확인해야 합니다.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Q3. 쌍둥이보험 가입 시, '태아보험'과 '어린이보험' 중 어떤 것을 선택해야 하나요?</h3>
+          <p>A. 쌍둥이보험은 태아보험의 성격을 가지고 시작하여, 출생 후 어린이보험으로 전환되는 형태가 많습니다. 즉, 임신 기간 중에는 태아 특약을 중심으로 보장받고, 출생 후에는 어린이보험의 기본 보장으로 이어집니다. 따라서 임신 중 가입 시에는 반드시 태아 특약(저체중아, 선천성 질환)을 포함하여 가입하고, 출생 후에는 불필요한 특약을 정리하여 어린이보험으로 보장을 이어가는 것이 일반적입니다.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Q4. 2026년 기준, 쌍둥이 출산 시 정부 지원금이나 혜택이 있나요?</h3>
+          <p>A. 네, 정부와 지자체에서 다태아(쌍둥이) 출산 가구에 대한 지원 정책을 시행하고 있습니다. 출산 직후 '첫만남이용권' 지원금 외에도, 지자체에 따라 출산 축하금이나 육아용품 지원을 제공합니다. 또한 '다둥이 행복카드'를 통해 다양한 할인 혜택을 받을 수 있습니다. 이는 보험 가입과는 별개로 받을 수 있는 혜택이므로, 거주지 지자체 홈페이지를 통해 정확한 지원 내용을 확인해 보시는 것이 좋습니다.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Q5. 쌍둥이보험 견적 비교 시 어떤 점을 중점적으로 봐야 하나요?</h3>
+          <p>A. 단순히 <strong>쌍둥이보험 예상 금액</strong>만 비교해서는 안 됩니다. 각 보험사의 '저체중아 인큐베이터 보장 한도', '선천성 질환 보장 범위'를 비교해야 합니다. <strong>쌍둥이보험 비교</strong>를 통해, A사는 저체중아 보장 금액이 높은 대신 B사는 선천성 질환 보장 범위가 넓은 등 각각의 <strong>쌍둥이보험 차이점</strong>을 파악할 수 있습니다. 갱신형/비갱신형 선택, 만기 시점도 함께 고려하여 가족의 재정 상황에 맞는 설계를 해야 합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>신뢰할 수 있는 외부 자료 및 참고 링크</h2>
+        <p>쌍둥이보험 가입 및 다태아 출산에 관련된 신뢰할 수 있는 외부 자료 링크를 제공합니다.</p>
+        <ul>
+          <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9%EC%A0%95%EB%B3%B4/%EA%B3%B5%EC%A4%91%EC%9C%84%EC%83%9D%EA%B4%80%EB%A6%AC%EB%B2%95" target="_blank" rel="noopener">법제처: 공중위생관리법 등 관련 법령 (일반 위생 및 안전 기준 참고)</a></li>
+          <li><a href="https://www.kostat.go.kr/portal/korea/kor_nw/2/6/2/index.board?bmode=read&aSeq=407675" target="_blank" rel="noopener">통계청: 2023년 다태아 출생통계 (다태아 현황 및 위험률 참고)</a></li>
+          <li><a href="https://www.fss.or.kr/fss/main/index.do" target="_blank" rel="noopener">금융감독원: 금융소비자 보호 및 보험 관련 안내 (소비자 권익 및 상품 정보)</a></li>
+          <li><a href="https://www.mohw.go.kr/react/policy/index.jsp" target="_blank" rel="noopener">보건복지부: 다자녀 가구 지원 정책 및 육아 지원 정보</a></li>
+          <li><a href="https://ko.wikipedia.org/wiki/%EB%8B%A4%ED%83%9C%EC%95%84" target="_blank" rel="noopener">위키백과: 다태아 (다태아 정의 및 의학적 정보 참고)</a></li>
+        </ul>
+        <p>위 자료들은 쌍둥이 출산 시 필요한 의학적 정보, 정부 지원 정책, 그리고 보험 가입 시 고려해야 할 법적 기준 및 소비자 보호 가이드라인을 제공합니다.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><strong>쌍둥이보험 비교 및 가이드</strong> &copy; 2026 All Rights Reserved.</p>
+      <p>
+        <a href="#">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+        <a href="#">문의하기</a>
+      </p>
+      <p>본 사이트는 쌍둥이보험 상품 비교 정보를 제공하며, 실제 계약은 선택하신 보험사와 직접 진행됩니다.</p>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ 토글 기능
+    document.querySelectorAll('.faq-item h3').forEach(item => {
+      item.addEventListener('click', event => {
+        const parent = item.parentElement;
+        parent.classList.toggle('active');
+      });
+    });
+    // 그래프 데이터 (CSS를 통해 동적으로 설정)
+    document.addEventListener('DOMContentLoaded', function() {
+        // 그래프 데이터 설정 (예시)
+        const barChartData = [
+            { label: "단태아", value: 120 },
+            { label: "쌍둥이", value: 150 }
+        ];
+        // 동적 높이 설정 (실제 데이터 반영)
+        // const bars = document.querySelectorAll('.bar');
+        // bars.forEach((bar, index) => {
+        //     bar.style.height = barChartData[index].value + 'px';
+        // });
+    });
+  </script>
+
+  
